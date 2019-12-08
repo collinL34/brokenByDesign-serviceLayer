@@ -18,7 +18,7 @@ app.get('/', ( req, res ) => {
 
 app.get('/user', ( req, res ) => {
     const user = DbInstance.find( req['email'] );
-
+    
     if ( user['Error'] ) {
         res.send( user ).status( 500 );
     } else {
@@ -41,6 +41,10 @@ app.post('/users/create', ( req, res ) => {
     res.send( req ).status( 200 );
 })
 
-app.listen( PORT, HOST )
-
-console.log( `Listening on PORT http://${HOST}:${PORT}` );
+if ( process.env.NODE_ENV === 'test' ) {
+    app.listen( 3000 )
+    console.log( `Listening on PORT: http://${HOST}:${PORT}` );
+} else {
+    app.listen( PORT )
+    console.log( `Listening on PORT: http://${HOST}:${PORT}` );
+}
