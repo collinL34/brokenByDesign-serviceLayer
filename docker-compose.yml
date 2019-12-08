@@ -1,0 +1,19 @@
+version: '3'
+services:
+  api:
+    image: bbd-service-layer
+    build: .
+    networks:
+      - backend
+    ports:
+      - "1496:1496"
+
+  web-cli:
+    image: bbd-service-layer
+    networks:
+      - backend
+    command: sh
+
+networks:
+  backend:
+    driver: bridge

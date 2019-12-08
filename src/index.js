@@ -3,6 +3,8 @@ const app = express();
 const Db = require( './Api' );
 const DbInstance = new Db();
 const User = require( './User' );
+const PORT = 1496;
+const HOST = '0.0.0.0';
 
 app.use(express.static('public', {setHeaders: (rses, path, req) => {
     res.set('Content-Type', 'application/json')
@@ -39,6 +41,6 @@ app.post('/users/create', ( req, res ) => {
     res.send( req ).status( 200 );
 })
 
-app.listen(1496, () => {
-    console.log( 'Listening on Port:3000' );
-});
+app.listen( PORT, HOST )
+
+console.log( `Listening on PORT http://${HOST}:${PORT}` );
